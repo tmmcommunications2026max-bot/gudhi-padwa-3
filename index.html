@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebrate Gudhi Padwa & Maharashtra Din</title>
+<meta property="og:title" content="Gudhi Padwa 2026 - Triveni Mitra Mandal">
+<meta property="og:description" content="Ticketing and Buy Membership link">
+<meta property="og:image" content="https://tmmcommunications2026max-bot.github.io/gudhi-padwa-3/gudhi-padwa-thumbnail.jpg">
+<meta property="og:type" content="event">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky-light:   #C9DEF3;
+    --sky-mid:     #A8C8E8;
+    --sky-deep:    #7AAFD4;
+    --sky-panel:   #D8EAF7;   /* slightly lighter than flyer for contrast */
+    --panel-edge:  #8FBAD8;
+
+    /* Button 1 — rich indigo/navy: strong contrast on light blue */
+    --btn1-hi:     #2E5FA3;
+    --btn1-lo:     #1A3D7A;
+    --btn1-border: #5B8FD4;
+    --btn1-glow:   rgba(46, 95, 163, 0.45);
+
+    /* Button 2 — warm dusty rose / mauve: complementary to cool blue */
+    --btn2-hi:     #B5546A;
+    --btn2-lo:     #8A3550;
+    --btn2-border: #D97B93;
+    --btn2-glow:   rgba(181, 84, 106, 0.42);
+
+    --text-on-btn: #FFFFFF;
+    --note-color:  #3A6080;
+    --gem-color:   #5A8BB0;
+    --divider-clr: #8FBAD8;
+  }
+
+  html, body { width: 100%; min-height: 100%; }
+
+  body {
+    background: #A8C8E8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Cinzel', serif;
+  }
+
+  /* ── CARD ── */
+  .card {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── FLYER IMAGE ── */
+  .flyer-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* ── BUTTON PANEL ── */
+  .btn-panel {
+    background: linear-gradient(180deg,
+      var(--sky-panel) 0%,
+      #C4DCF2 55%,
+      #B8D4EE 100%
+    );
+    border-top: 2px solid var(--panel-edge);
+    padding: clamp(18px, 4.5vw, 28px) clamp(18px, 6vw, 34px) clamp(22px, 5vw, 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(13px, 3vw, 17px);
+
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-play-state: paused;
+  }
+  .btn-panel.visible {
+    animation-play-state: running;
+  }
+
+  /* ── ORNAMENTAL DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--divider-clr), transparent);
+  }
+  .divider-gem {
+    color: var(--gem-color);
+    font-size: clamp(10px, 2.3vw, 13px);
+    letter-spacing: 6px;
+    line-height: 1;
+  }
+
+  /* ── BUTTONS ── */
+  .cta-row {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 2.5vw, 13px);
+    width: 100%;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 7px;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+    color: var(--text-on-btn);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    font-size: clamp(12px, 2.9vw, 14.5px);
+    letter-spacing: clamp(1.2px, 0.4vw, 1.9px);
+    padding: clamp(14px, 3.5vw, 18px) 20px;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  }
+
+  /* Shine sweep */
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    transition: left 0.5s ease;
+  }
+  .btn:hover::after { left: 160%; }
+
+  @media (hover: none) { .btn:hover { transform: none; } }
+  .btn:hover  { transform: translateY(-2px); }
+  .btn:active { transform: scale(0.98); }
+
+  /* TICKETS — rich indigo / navy */
+  .btn-tickets {
+    background: linear-gradient(135deg,
+      var(--btn1-hi) 0%,
+      var(--btn1-lo) 50%,
+      var(--btn1-hi) 100%
+    );
+    border: 2px solid var(--btn1-border);
+    box-shadow:
+      0 0 0 1px rgba(91,143,212,0.2),
+      0 4px 22px var(--btn1-glow),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .btn-tickets:hover {
+    box-shadow:
+      0 0 0 1px rgba(91,143,212,0.4),
+      0 9px 30px var(--btn1-glow),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+
+  /* MEMBERSHIP — dusty rose / mauve */
+  .btn-member {
+    background: linear-gradient(135deg,
+      var(--btn2-hi) 0%,
+      var(--btn2-lo) 50%,
+      var(--btn2-hi) 100%
+    );
+    border: 2px solid var(--btn2-border);
+    box-shadow:
+      0 0 0 1px rgba(217,123,147,0.2),
+      0 4px 22px var(--btn2-glow),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .btn-member:hover {
+    box-shadow:
+      0 0 0 1px rgba(217,123,147,0.4),
+      0 9px 30px var(--btn2-glow),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+
+  /* ── MEMBER NOTE ── */
+  .member-note {
+    font-size: clamp(9px, 2vw, 10.5px);
+    color: var(--note-color);
+    letter-spacing: 0.7px;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── DESKTOP ── */
+  @media (min-width: 541px) {
+    body { padding: clamp(16px, 3vw, 36px) 0; }
+    .card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(100,160,210,0.4),
+        0 0 60px rgba(100,160,210,0.2),
+        0 28px 90px rgba(0,0,0,0.4);
+    }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 540px) {
+    body { padding: 0; background: var(--sky-light); }
+    .card { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <img class="flyer-img"
+       id="flyer"
+       src="https://tmmcommunications2026max-bot.github.io/gudhi-padwa-3/gudhi-padwa-flyer.png"
+       alt="Gudhi Padwa & Maharashtra Din Celebration Flyer"
+       loading="eager"
+       decoding="async">
+
+  <div class="btn-panel" id="btnPanel">
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem">✦ ✦ ✦</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="cta-row">
+      <a href="https://www.triveni-mandal.org/event-details/gudhi-padwa-2026"
+         class="btn btn-tickets"
+         target="_blank" rel="noopener noreferrer">
+        🎟️&nbsp;&nbsp;Buy Tickets
+      </a>
+      <a href="https://www.triveni-mandal.org/plans-pricing"
+         class="btn btn-member"
+         target="_blank" rel="noopener noreferrer">
+        ⭐&nbsp;&nbsp;Become a Member
+      </a>
+    </div>
+
+    <div class="member-note">★ Members receive discounted event pricing — Join today!</div>
+
+  </div>
+
+</div>
+
+<script>
+  const flyer = document.getElementById('flyer');
+  const panel = document.getElementById('btnPanel');
+  function revealPanel() { panel.classList.add('visible'); }
+  if (flyer.complete) { revealPanel(); }
+  else {
+    flyer.addEventListener('load',  revealPanel);
+    flyer.addEventListener('error', revealPanel);
+  }
+</script>
+
+</body>
+</html>
