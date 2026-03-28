@@ -16,52 +16,53 @@
   :root {
     --sky-light:   #C9DEF3;
     --sky-mid:     #A8C8E8;
-    --sky-deep:    #7AAFD4;
-    --sky-panel:   #D8EAF7;   /* slightly lighter than flyer for contrast */
+    --sky-panel:   #D8EAF7;
     --panel-edge:  #8FBAD8;
-
-    /* Button 1 — rich indigo/navy: strong contrast on light blue */
     --btn1-hi:     #2E5FA3;
     --btn1-lo:     #1A3D7A;
     --btn1-border: #5B8FD4;
     --btn1-glow:   rgba(46, 95, 163, 0.45);
-
-    /* Button 2 — warm dusty rose / mauve: complementary to cool blue */
     --btn2-hi:     #B5546A;
     --btn2-lo:     #8A3550;
     --btn2-border: #D97B93;
     --btn2-glow:   rgba(181, 84, 106, 0.42);
-
-    --text-on-btn: #FFFFFF;
     --note-color:  #3A6080;
     --gem-color:   #5A8BB0;
-    --divider-clr: #8FBAD8;
   }
 
-  html, body { width: 100%; min-height: 100%; }
+  html, body {
+    width: 100%;
+    min-height: 100%;
+  }
 
   body {
-    background: #A8C8E8;
+    background: var(--sky-mid);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     font-family: 'Cinzel', serif;
   }
 
-  /* ── CARD ── */
+  /* ── CARD: portrait-width constrained ── */
   .card {
     width: 100%;
-    max-width: 520px;
+    max-width: 480px;          /* tighter portrait width */
     display: flex;
     flex-direction: column;
   }
 
-  /* ── FLYER IMAGE ── */
+  /* ── PORTRAIT IMAGE:
+        - width: 100% of card
+        - height: auto so portrait aspect ratio is fully respected
+        - no cropping, no distortion
+  ── */
   .flyer-img {
     display: block;
     width: 100%;
     height: auto;
     object-fit: contain;
+    object-position: top center;
   }
 
   /* ── BUTTON PANEL ── */
@@ -72,22 +73,22 @@
       #B8D4EE 100%
     );
     border-top: 2px solid var(--panel-edge);
-    padding: clamp(18px, 4.5vw, 28px) clamp(18px, 6vw, 34px) clamp(22px, 5vw, 32px);
+    padding: clamp(16px, 4vw, 26px) clamp(16px, 5vw, 30px) clamp(20px, 5vw, 30px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(13px, 3vw, 17px);
+    gap: clamp(12px, 2.8vw, 16px);
 
     opacity: 0;
-    transform: translateY(20px);
-    animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    transform: translateY(18px);
+    animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-play-state: paused;
   }
   .btn-panel.visible {
     animation-play-state: running;
   }
 
-  /* ── ORNAMENTAL DIVIDER ── */
+  /* ── DIVIDER ── */
   .divider {
     display: flex;
     align-items: center;
@@ -97,11 +98,11 @@
   .divider-line {
     flex: 1;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--divider-clr), transparent);
+    background: linear-gradient(to right, transparent, var(--panel-edge), transparent);
   }
   .divider-gem {
     color: var(--gem-color);
-    font-size: clamp(10px, 2.3vw, 13px);
+    font-size: clamp(9px, 2vw, 12px);
     letter-spacing: 6px;
     line-height: 1;
   }
@@ -110,7 +111,7 @@
   .cta-row {
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 2.5vw, 13px);
+    gap: clamp(10px, 2.2vw, 12px);
     width: 100%;
   }
 
@@ -118,7 +119,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
+    gap: 8px;
     font-family: 'Cinzel', serif;
     font-weight: 900;
     text-decoration: none;
@@ -126,24 +127,23 @@
     cursor: pointer;
     text-transform: uppercase;
     width: 100%;
-    color: var(--text-on-btn);
+    color: #fff;
     transition: transform 0.18s ease, box-shadow 0.18s ease;
-    font-size: clamp(12px, 2.9vw, 14.5px);
-    letter-spacing: clamp(1.2px, 0.4vw, 1.9px);
-    padding: clamp(14px, 3.5vw, 18px) 20px;
+    font-size: clamp(11.5px, 2.6vw, 14px);
+    letter-spacing: clamp(1px, 0.35vw, 1.7px);
+    padding: clamp(13px, 3.2vw, 16px) 18px;
     position: relative;
     overflow: hidden;
     text-shadow: 0 1px 3px rgba(0,0,0,0.35);
   }
 
-  /* Shine sweep */
   .btn::after {
     content: '';
     position: absolute;
     top: 0; left: -100%;
     width: 55%;
     height: 100%;
-    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 50%, transparent 100%);
     transition: left 0.5s ease;
   }
   .btn:hover::after { left: 160%; }
@@ -152,49 +152,26 @@
   .btn:hover  { transform: translateY(-2px); }
   .btn:active { transform: scale(0.98); }
 
-  /* TICKETS — rich indigo / navy */
   .btn-tickets {
-    background: linear-gradient(135deg,
-      var(--btn1-hi) 0%,
-      var(--btn1-lo) 50%,
-      var(--btn1-hi) 100%
-    );
+    background: linear-gradient(135deg, var(--btn1-hi) 0%, var(--btn1-lo) 50%, var(--btn1-hi) 100%);
     border: 2px solid var(--btn1-border);
-    box-shadow:
-      0 0 0 1px rgba(91,143,212,0.2),
-      0 4px 22px var(--btn1-glow),
-      inset 0 1px 0 rgba(255,255,255,0.18);
+    box-shadow: 0 4px 20px var(--btn1-glow), inset 0 1px 0 rgba(255,255,255,0.18);
   }
   .btn-tickets:hover {
-    box-shadow:
-      0 0 0 1px rgba(91,143,212,0.4),
-      0 9px 30px var(--btn1-glow),
-      inset 0 1px 0 rgba(255,255,255,0.18);
+    box-shadow: 0 8px 28px var(--btn1-glow), inset 0 1px 0 rgba(255,255,255,0.18);
   }
 
-  /* MEMBERSHIP — dusty rose / mauve */
   .btn-member {
-    background: linear-gradient(135deg,
-      var(--btn2-hi) 0%,
-      var(--btn2-lo) 50%,
-      var(--btn2-hi) 100%
-    );
+    background: linear-gradient(135deg, var(--btn2-hi) 0%, var(--btn2-lo) 50%, var(--btn2-hi) 100%);
     border: 2px solid var(--btn2-border);
-    box-shadow:
-      0 0 0 1px rgba(217,123,147,0.2),
-      0 4px 22px var(--btn2-glow),
-      inset 0 1px 0 rgba(255,255,255,0.18);
+    box-shadow: 0 4px 20px var(--btn2-glow), inset 0 1px 0 rgba(255,255,255,0.18);
   }
   .btn-member:hover {
-    box-shadow:
-      0 0 0 1px rgba(217,123,147,0.4),
-      0 9px 30px var(--btn2-glow),
-      inset 0 1px 0 rgba(255,255,255,0.18);
+    box-shadow: 0 8px 28px var(--btn2-glow), inset 0 1px 0 rgba(255,255,255,0.18);
   }
 
-  /* ── MEMBER NOTE ── */
   .member-note {
-    font-size: clamp(9px, 2vw, 10.5px);
+    font-size: clamp(8.5px, 1.8vw, 10px);
     color: var(--note-color);
     letter-spacing: 0.7px;
     text-align: center;
@@ -203,27 +180,38 @@
   }
 
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   /* ── DESKTOP ── */
-  @media (min-width: 541px) {
-    body { padding: clamp(16px, 3vw, 36px) 0; }
+  @media (min-width: 500px) {
+    body {
+      padding: clamp(16px, 3vw, 40px) 0;
+      min-height: 100dvh;
+      justify-content: center;
+    }
     .card {
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       box-shadow:
-        0 0 0 1px rgba(100,160,210,0.4),
-        0 0 60px rgba(100,160,210,0.2),
-        0 28px 90px rgba(0,0,0,0.4);
+        0 0 0 1px rgba(100,160,210,0.35),
+        0 0 50px rgba(100,160,210,0.18),
+        0 24px 80px rgba(0,0,0,0.35);
     }
   }
 
-  /* ── MOBILE ── */
-  @media (max-width: 540px) {
-    body { padding: 0; background: var(--sky-light); }
-    .card { max-width: 100%; }
+  /* ── MOBILE: flush, full-width portrait ── */
+  @media (max-width: 499px) {
+    body {
+      padding: 0;
+      background: var(--sky-light);
+      justify-content: flex-start;
+    }
+    .card {
+      max-width: 100%;
+      border-radius: 0;
+    }
   }
 </style>
 </head>
